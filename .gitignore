@@ -6,6 +6,8 @@
 .pnp.js
 .idea
 
+frontend/node_modules
+
 # testing
 /coverage
 
