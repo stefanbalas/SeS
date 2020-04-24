@@ -5,7 +5,7 @@ import {Form} from "./Form";
 import MenuListComposition from "./Menu";
 import purple from "@material-ui/core/colors/purple";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const theme = createMuiTheme({
     palette: {
@@ -22,7 +22,7 @@ function App() {
     return (
         <MuiThemeProvider theme={theme}>
             <div className="App">
-                <AppBar color="secondary" className="App-header container">
+                <AppBar color="secondary" className="App-header">
                     <div className="header d-flex row justify-content-between align-items-center">
                         <div className="menu">
                             <MenuListComposition/>
@@ -30,8 +30,8 @@ function App() {
                         <div className="logo pr-3">
                             Healthy
                         </div>
-                        <div className="user-menu pr-3">
-                            P
+                        <div className="user-menu pr-3 pt-2">
+                            <AccountCircleIcon/>
                         </div>
                     </div>
                 </AppBar>

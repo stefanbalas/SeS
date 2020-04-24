@@ -17,6 +17,10 @@
   background-color: #1d1f27;
 }
 
+.App-header > .row {
+  margin: 0;
+}
+
 .App-header > .header {
   height: 100%;
 }
