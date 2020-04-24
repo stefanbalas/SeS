@@ -14,6 +14,7 @@ const initialState = {
     age: 0,
     gender: '',
     height: 0,
+    lifestyle: '',
 };
 
 const initialErrors = {
@@ -23,6 +24,7 @@ const initialErrors = {
     age: 1,
     gender: 1,
     height: 1,
+    lifestyle: 1,
 };
 
 export class Form extends React.Component{
@@ -56,8 +58,16 @@ export class Form extends React.Component{
         this.setState(initialState);
         this.errors = {...initialErrors};
         let data = this.state;
-        axios.post(`http://localhost:8080/submitForm`, { data })
-            .then(res => {
+
+        fetch('http://localhost:8080/submitForm/', {
+            method: 'POST',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
                 console.log(res);
                 console.log(res.data);
             })
@@ -95,6 +105,20 @@ export class Form extends React.Component{
                 <TextField value={this.state.height? this.state.height : ''} onChange={this.handleChange}
                            error={this.state.height || this.errors.height ? false:true}
                            className="pb-4" required name="height" id="height" label="Height" type="number"/>
+                <FormControl className="pb-2">
+                    <InputLabel id="lifestyle-label">Lifestyle</InputLabel>
+                    <Select
+                        labelId="lifestyle-label"
+                        id="lifestyle"
+                        name="lifestyle"
+                        error={this.state.lifestyle || this.errors.lifestyle ? false:true}
+                        value={this.state.lifestyle}
+                        onChange={this.handleChange}>
+                        <MenuItem value={"h"}>High activity</MenuItem>
+                        <MenuItem value={"m"}>Medium activity</MenuItem>
+                        <MenuItem value={"l"}>Low activity</MenuItem>
+                    </Select>
+                </FormControl>
                 <Button variant="outlined" color="primary" onClick={this.onSubmit}>Submit</Button>
             </form>
         </div>
