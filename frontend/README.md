@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TO INSTALL 
+
+node - [downlaod](https://nodejs.org/en/download/)
+yarn - npm -g install yarn (after node installation) or [download](https://yarnpkg.com/getting-started/install)
+
+## DONT!!!
+
+Please dont install modules with npm. Use yarn instead. (yarn add...).
+
 ## Available Scripts
 
 In the project directory, you can run:
