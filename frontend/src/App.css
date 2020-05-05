@@ -34,7 +34,6 @@
 
 .logo {
   color: #9c27b0;
-  font-size: 35px;
   font-style: italic;
   font-weight: bold;
   text-shadow: -3px 3px 4px #7d002dc7;
@@ -54,4 +53,17 @@
 }
 .MuiPaper-root {
   background-color: #1d1f27 !important;
+}
+a, a:hover {
+  color: #9c27b0;
+  text-decoration: none;
+}
+.logo .MuiListItem-button:hover {
+  background: transparent;
+}
+.logo .MuiMenuItem-root {
+  font-size: 30px;
+}
+button:focus {
+  outline: none !important;
 }

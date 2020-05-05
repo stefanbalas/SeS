@@ -6,9 +6,22 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import { makeStyles } from '@material-ui/core/styles';
+import {createMuiTheme, makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import {Lifestyle} from "./Lifestyle";
+import {MedicalHistory} from "./MedicalHistory";
+import {MedicalTest} from "./MedicalTest";
+import AppBar from "@material-ui/core/AppBar/AppBar";
+import AccountCircleIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import purple from "@material-ui/core/colors/purple";
+import Home from "./Home";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,6 +31,17 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(0),
     },
 }));
+
+const theme = createMuiTheme({
+    palette: {
+        type: "dark",
+        primary: purple,
+        secondary: {
+            main: '#1d1f27',
+            contrastText: '#FFF',
+        }
+    }
+});
 
 export default function MenuListComposition() {
     const classes = useStyles();
@@ -54,34 +78,75 @@ export default function MenuListComposition() {
     }, [open]);
 
     return (
-        <div className={classes.root}>
-            <div>
-                <Button
-                    ref={anchorRef}
-                    aria-controls={open ? 'menu-list-grow' : undefined}
-                    aria-haspopup="true"
-                    onClick={handleToggle}
-                >
-                <MenuIcon/>
-                </Button>
-                <Popper  className={"menu-open"} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                    {({ TransitionProps, placement }) => (
-                        <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                        >
-                            <Paper>
-                                <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={handleClose}>Home</MenuItem>
-                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                    </MenuList>
-                                </ClickAwayListener>
-                            </Paper>
-                        </Grow>
-                    )}
-                </Popper>
-            </div>
-        </div>
+        <Router>
+            <MuiThemeProvider theme={theme}>
+                <div className="App">
+                    <AppBar color="secondary" className="App-header">
+                        <div className="header d-flex row justify-content-between align-items-center">
+                            <div className="menu">
+                                <div className={classes.root}>
+                                    <div>
+                                        <Button
+                                            ref={anchorRef}
+                                            aria-controls={open ? 'menu-list-grow' : undefined}
+                                            aria-haspopup="true"
+                                            onClick={handleToggle}
+                                        >
+                                            <MenuIcon/>
+                                        </Button>
+                                        <Popper  className={"menu-open"} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                                            {({ TransitionProps, placement }) => (
+                                                <Grow
+                                                    {...TransitionProps}
+                                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                >
+                                                    <Paper>
+                                                        <ClickAwayListener onClickAway={handleClose}>
+                                                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                                                    <Link to="/medical-test">
+                                                                        <MenuItem onClick={handleClose}>Medical Tests</MenuItem>
+                                                                    </Link>
+                                                                    <Link to="/medical-history">
+                                                                        <MenuItem onClick={handleClose}>Medical History</MenuItem>
+                                                                    </Link>
+                                                                    <Link to="/lifestyle">
+                                                                        <MenuItem onClick={handleClose}>Lifestyle</MenuItem>
+                                                                    </Link>
+                                                            </MenuList>
+                                                        </ClickAwayListener>
+                                                    </Paper>
+                                                </Grow>
+                                            )}
+                                        </Popper>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="logo pr-3">
+                                <Link to="/">
+                                    <MenuItem onClick={handleClose}>Healthy</MenuItem>
+                                </Link>
+                            </div>
+                            <div className="user-menu pr-3 pt-2">
+                                <AccountCircleIcon/>
+                            </div>
+                        </div>
+                    </AppBar>
+                    <Switch>
+                        <Route path="/medical-test">
+                            <MedicalTest />
+                        </Route>
+                        <Route path="/medical-history">
+                            <MedicalHistory />
+                        </Route>
+                        <Route path="/lifestyle">
+                            <Lifestyle />
+                        </Route>
+                        <Route path="/">
+                            <Home />
+                        </Route>
+                    </Switch>
+                </div>
+            </MuiThemeProvider>
+        </Router>
     );
 }
