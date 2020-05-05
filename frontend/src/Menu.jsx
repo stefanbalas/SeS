@@ -19,9 +19,10 @@ import {Lifestyle} from "./Lifestyle";
 import {MedicalHistory} from "./MedicalHistory";
 import {MedicalTest} from "./MedicalTest";
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import AccountCircleIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import purple from "@material-ui/core/colors/purple";
 import Home from "./Home";
+import Menu from '@material-ui/core/Menu';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -77,6 +78,16 @@ export default function MenuListComposition() {
         prevOpen.current = open;
     }, [open]);
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose2 = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <Router>
             <MuiThemeProvider theme={theme}>
@@ -127,7 +138,19 @@ export default function MenuListComposition() {
                                 </Link>
                             </div>
                             <div className="user-menu pr-3 pt-2">
-                                <AccountCircleIcon/>
+                                <div aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                    <AccountBoxIcon/>
+                                </div>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose2}
+                                >
+                                    <MenuItem onClick={handleClose2}>Sign In</MenuItem>
+                                    <MenuItem onClick={handleClose2}>Sign Up</MenuItem>
+                                </Menu>
                             </div>
                         </div>
                     </AppBar>
