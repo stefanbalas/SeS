@@ -61,6 +61,6 @@ public class HealthyService {
 
 
     public List<String> getLifestyleTypes() {
-        return lifestyleRepository.findAll().stream().map(LifestyleType::getLifestyle).collect(Collectors.toList());
+        return lifestyleRepository.findAll().stream().map(LifestyleType::getLifestyleName).collect(Collectors.toList());
     }
 }

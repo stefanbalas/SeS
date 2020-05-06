@@ -1,10 +1,10 @@
 server:
   address: 0.0.0.0
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/healthy_db?verifyServerCertificate=false&useSSL=true&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/healthy_db?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC
     username: root
     password: root159357
     driver-class-name: com.mysql.jdbc.Driver
@@ -23,6 +23,12 @@ spring:
 
 ses:
   lifestyles:
-    - Activ
-    - Semiactiv
-    - Sedentar
+    lifestyle1:
+      lifestyleId: 1
+      lifestyleName: Activ
+    lifestyle2:
+      lifestyleId: 2
+      lifestyleName: Semiactiv
+    lifestyle3:
+      lifestyleId: 3
+      lifestyleName: Sedentar

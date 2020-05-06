@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface LifestyleRepository extends JpaRepository<LifestyleType, Integer> {
     List<LifestyleType> findAll();
-    Optional<LifestyleType> findByLifestyle(String lifestyle);
+    Optional<LifestyleType> findByLifestyleName(String lifestyleName);
     void deleteAll();
 }

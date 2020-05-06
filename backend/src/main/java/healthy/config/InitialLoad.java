@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(0)
-class MyApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
+class InitialLoad implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
     YAMLConfig yamlConfig;
@@ -21,6 +21,6 @@ class MyApplicationListener implements ApplicationListener<ApplicationReadyEvent
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         lifestyleRepository.deleteAll();
-        yamlConfig.getLifestyles().forEach(lifeStyleName -> lifestyleRepository.save(new LifestyleType(lifeStyleName)));
+        yamlConfig.getLifestyles().forEach((index, lifestyle) -> lifestyleRepository.save(new LifestyleType(lifestyle.getLifestyleId(), lifestyle.getLifestyleName())));
     }
 }
