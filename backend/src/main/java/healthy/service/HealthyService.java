@@ -50,25 +50,9 @@ public class HealthyService {
         activityRepository.save(new Activity(activityModel));
     }
 
-    public void validateModel(UserModel userModel) {
-        if (userModel.getFirstName() == null) throw new IllegalArgumentException("firstName must be present");
-        if (userModel.getFirstName().length() < 4)
-            throw new IllegalArgumentException("firstName must have at least 4 characters");
-        if (userModel.getLastName() == null) throw new IllegalArgumentException("lastName must be present");
-        if (userModel.getLastName().length() < 4)
-            throw new IllegalArgumentException("lastName must have at least 4 characters");
-        if (userModel.getEmail() == null) throw new IllegalArgumentException("email must be present");
-        if (userModel.getEmail().length() < 6)
-            throw new IllegalArgumentException("email must have at least 6 characters");
-        if (checkIfEmailExists(userModel.getEmail())) throw new IllegalArgumentException("email already exists");
-        if (userModel.getAge() == 0) throw new IllegalArgumentException("age must be present (or cannot be 0)");
-        if (!Character.isLetter(userModel.getGender())) throw new IllegalArgumentException("gender must be present");
-        if (userModel.getHeight() == 0) throw new IllegalArgumentException("height must be present (or cannot be 0");
-        if (userModel.getLifestyle() == null) throw new IllegalArgumentException("lifestyle must be present");
-    }
-
-    private boolean checkIfEmailExists(String email) {
-        return userRepository.findByEmail(email).isPresent();
+    public void checkIfEmailExists(String email) {
+        if(userRepository.findByEmail(email).isPresent())
+            throw new IllegalArgumentException("email already exists");
     }
 
 

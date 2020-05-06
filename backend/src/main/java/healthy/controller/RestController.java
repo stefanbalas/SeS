@@ -20,14 +20,14 @@ public class RestController {
     @PostMapping(value = "/submitForm")
     public ResponseEntity<String> submitForm(@RequestBody UserModel userModel) {
         try {
-            healthyService.validateModel(userModel);
+            userModel.validate();
+            healthyService.checkIfEmailExists(userModel.getEmail());
             healthyService.saveUserToDatabase(userModel);
             return ResponseEntity.ok().body("Saved user to database. Yay! :)");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
 
     @PostMapping(value = "/saveLifestyle")
     public ResponseEntity<String> saveLifestyle(@RequestBody LifestyleModel lifestyleModel) {
