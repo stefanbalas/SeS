@@ -9,12 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormModel {
-    String firstName;
-    String lastName;
-    String email;
-    int age;
-    char gender;
-    float height;
-    String lifestyle;
+public class ActivityModel {
+    private int userId;
+    private float weight;
+    private int step;
+    private float water;
+    private Long date;
 }

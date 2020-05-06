@@ -1,6 +1,6 @@
 package healthy.controller;
 
-import healthy.model.FormModel;
+import healthy.model.UserModel;
 import healthy.service.HealthyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +21,10 @@ public class RestController {
     HealthyService healthyService;
 
     @PostMapping(value = "/submitForm")
-    public ResponseEntity<String> submitForm(@RequestBody FormModel formModel) {
+    public ResponseEntity<String> submitForm(@RequestBody UserModel userModel) {
         try {
-            healthyService.validateModel(formModel);
-            healthyService.saveUserToDatabase(formModel);
+            healthyService.validateModel(userModel);
+            healthyService.saveUserToDatabase(userModel);
             return ResponseEntity.ok().body("Saved user to database. Yay! :)");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
