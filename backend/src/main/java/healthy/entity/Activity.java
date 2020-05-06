@@ -29,11 +29,11 @@ public class Activity {
     @Column(name = "step", nullable = false)
     private int step;
 
-    @Column(name = "water", nullable = false, unique = true)
+    @Column(name = "water", nullable = false)
     private float water;
 
-    @Column(name = "current_date", nullable = false)
-    public Date currentDate;
+    @Column(name = "date", nullable = false)
+    public Date date;
 
     public Activity() {
     }
@@ -42,11 +42,11 @@ public class Activity {
         this.id = id;
     }
 
-    public Activity(int userId, float weight, int step, float water, Date currentDate) {
+    public Activity(int userId, float weight, int step, float water, Date date) {
         this.userId = userId;
         this.weight = weight;
         this.step = step;
         this.water = water;
-        this.currentDate = currentDate;
+        this.date = date;
     }
 }
