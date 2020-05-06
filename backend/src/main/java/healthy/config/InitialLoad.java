@@ -1,7 +1,7 @@
 package healthy.config;
 
 import healthy.entity.LifestyleType;
-import healthy.repository.LifestyleRepository;
+import healthy.repository.LifestyleTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -16,11 +16,11 @@ class InitialLoad implements ApplicationListener<ApplicationReadyEvent> {
     YAMLConfig yamlConfig;
 
     @Autowired
-    LifestyleRepository lifestyleRepository;
+    LifestyleTypeRepository lifestyleTypeRepository;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        lifestyleRepository.deleteAll();
-        yamlConfig.getLifestyles().forEach((index, lifestyle) -> lifestyleRepository.save(new LifestyleType(lifestyle.getLifestyleId(), lifestyle.getLifestyleName())));
+        lifestyleTypeRepository.deleteAll();
+        yamlConfig.getLifestyles().forEach((index, lifestyle) -> lifestyleTypeRepository.save(new LifestyleType(lifestyle.getLifestyleId(), lifestyle.getLifestyleName())));
     }
 }

@@ -3,7 +3,7 @@ package healthy.service;
 import healthy.entity.LifestyleType;
 import healthy.entity.User;
 import healthy.model.FormModel;
-import healthy.repository.LifestyleRepository;
+import healthy.repository.LifestyleTypeRepository;
 import healthy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 public class HealthyService {
 
     private final UserRepository userRepository;
-    private final LifestyleRepository lifestyleRepository;
+    private final LifestyleTypeRepository lifestyleTypeRepository;
 
     @Autowired
-    public HealthyService(UserRepository userRepository, LifestyleRepository lifestyleRepository) {
+    public HealthyService(UserRepository userRepository, LifestyleTypeRepository lifestyleTypeRepository) {
         this.userRepository = userRepository;
-        this.lifestyleRepository = lifestyleRepository;
+        this.lifestyleTypeRepository = lifestyleTypeRepository;
     }
 
     public void saveUserToDatabase(FormModel formModel) {
@@ -61,6 +61,6 @@ public class HealthyService {
 
 
     public List<String> getLifestyleTypes() {
-        return lifestyleRepository.findAll().stream().map(LifestyleType::getLifestyleName).collect(Collectors.toList());
+        return lifestyleTypeRepository.findAll().stream().map(LifestyleType::getLifestyleName).collect(Collectors.toList());
     }
 }
