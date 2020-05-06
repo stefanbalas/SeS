@@ -1,5 +1,6 @@
 package healthy.entity;
 
+import healthy.model.LifestyleModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,16 +41,12 @@ public class Lifestyle {
     public Lifestyle() {
     }
 
-    public Lifestyle(int id) {
-        this.id = id;
-    }
-
-    public Lifestyle(int userId, int jobActivity, int freetimeActivity, int practicesSport, int timpMediuActivitate, int timpCalculator) {
-        this.userId = userId;
-        this.jobActivity = jobActivity;
-        this.freetimeActivity = freetimeActivity;
-        this.practicesSport = practicesSport;
-        this.timpMediuActivitate = timpMediuActivitate;
-        this.timpCalculator = timpCalculator;
+    public Lifestyle(LifestyleModel lifestyleModel) {
+        this.userId = lifestyleModel.getUserId();
+        this.jobActivity = lifestyleModel.getJobActivity();
+        this.freetimeActivity = lifestyleModel.getFreetimeActivity();
+        this.practicesSport = lifestyleModel.getPracticesSport();
+        this.timpMediuActivitate = lifestyleModel.getTimpMediuActivitate();
+        this.timpCalculator = lifestyleModel.getTimpCalculator();
     }
 }

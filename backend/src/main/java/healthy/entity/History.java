@@ -1,5 +1,6 @@
 package healthy.entity;
 
+import healthy.model.HistoryModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,14 +36,10 @@ public class History {
     public History() {
     }
 
-    public History(int id) {
-        this.id = id;
-    }
-
-    public History(int userId, String name, Date lastVisit, Date recommendVisit) {
-        this.userId = userId;
-        this.name = name;
-        this.lastVisit = lastVisit;
-        this.recommendVisit = recommendVisit;
+    public History(HistoryModel historyModel) {
+        this.userId = historyModel.getUserId();
+        this.name = historyModel.getName();
+        this.lastVisit = new Date(historyModel.getLastVisit());
+        this.recommendVisit = new Date(historyModel.getRecommendVisit());
     }
 }

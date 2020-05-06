@@ -1,5 +1,6 @@
 package healthy.entity;
 
+import healthy.model.AnalizeModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,16 +42,12 @@ public class Analize {
     public Analize() {
     }
 
-    public Analize(int id) {
-        this.id = id;
-    }
-
-    public Analize(int userId, String name, float value, float minValue, float maxValue, Date date) {
-        this.userId = userId;
-        this.name = name;
-        this.value = value;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        this.date = date;
+    public Analize(AnalizeModel analizeModel) {
+        this.userId = analizeModel.getUserId();
+        this.name = analizeModel.getName();
+        this.value = analizeModel.getValue();
+        this.minValue = analizeModel.getMinValue();
+        this.maxValue = analizeModel.getMaxValue();
+        this.date = new Date(analizeModel.getDate());
     }
 }

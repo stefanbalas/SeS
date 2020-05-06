@@ -1,10 +1,8 @@
 package healthy.service;
 
-import healthy.entity.LifestyleType;
-import healthy.entity.User;
-import healthy.model.UserModel;
-import healthy.repository.LifestyleTypeRepository;
-import healthy.repository.UserRepository;
+import healthy.entity.*;
+import healthy.model.*;
+import healthy.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +11,43 @@ import java.util.stream.Collectors;
 
 @Service
 public class HealthyService {
-
-    private final UserRepository userRepository;
     private final LifestyleTypeRepository lifestyleTypeRepository;
+    private final LifestyleRepository lifestyleRepository;
+    private final ActivityRepository activityRepository;
+    private final AnalizeRepository analizeRepository;
+    private final HistoryRepository historyRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public HealthyService(UserRepository userRepository, LifestyleTypeRepository lifestyleTypeRepository) {
+    public HealthyService(LifestyleRepository lifestyleRepository, LifestyleTypeRepository lifestyleTypeRepository,
+                          ActivityRepository activityRepository, AnalizeRepository analizeRepository,
+                          HistoryRepository historyRepository, UserRepository userRepository) {
         this.userRepository = userRepository;
         this.lifestyleTypeRepository = lifestyleTypeRepository;
+        this.activityRepository = activityRepository;
+        this.analizeRepository = analizeRepository;
+        this.historyRepository = historyRepository;
+        this.lifestyleRepository = lifestyleRepository;
     }
 
     public void saveUserToDatabase(UserModel userModel) {
-        userRepository.save(mapModelToUser(userModel));
+        userRepository.save(new User(userModel));
+    }
+
+    public void saveLifestyleToDatabase(LifestyleModel lifestyleModel) {
+        lifestyleRepository.save(new Lifestyle(lifestyleModel));
+    }
+
+    public void saveAnalizeToDatabase(AnalizeModel analizeModel) {
+        analizeRepository.save(new Analize(analizeModel));
+    }
+
+    public void saveHistoryToDatabase(HistoryModel historyModel) {
+        historyRepository.save(new History(historyModel));
+    }
+
+    public void saveActivityToDatabase(ActivityModel activityModel) {
+        activityRepository.save(new Activity(activityModel));
     }
 
     public void validateModel(UserModel userModel) {
@@ -48,19 +71,14 @@ public class HealthyService {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    private User mapModelToUser(UserModel userModel) {
-        return User.builder()
-                .firstName(userModel.getEmail())
-                .lastName(userModel.getLastName())
-                .email(userModel.getEmail())
-                .age(userModel.getAge())
-                .gender(userModel.getGender())
-                .height(userModel.getHeight())
-                .lifestyle(userModel.getLifestyle()).build();
-    }
-
 
     public List<String> getLifestyleTypes() {
         return lifestyleTypeRepository.findAll().stream().map(LifestyleType::getLifestyleName).collect(Collectors.toList());
+    }
+
+    public List<ActivityModel> getActivityByUserId(int id) {
+        return activityRepository.findAllByUserId(id).stream()
+                .map(ActivityModel::new)
+                .collect(Collectors.toList());
     }
 }

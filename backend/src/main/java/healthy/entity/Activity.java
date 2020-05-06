@@ -1,5 +1,6 @@
 package healthy.entity;
 
+import healthy.model.ActivityModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,15 +39,11 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(int id) {
-        this.id = id;
-    }
-
-    public Activity(int userId, float weight, int step, float water, Date date) {
-        this.userId = userId;
-        this.weight = weight;
-        this.step = step;
-        this.water = water;
-        this.date = date;
+    public Activity(ActivityModel activityModel) {
+        this.userId = activityModel.getUserId();
+        this.weight = activityModel.getWeight();
+        this.step = activityModel.getStep();
+        this.water = activityModel.getWater();
+        this.date = new Date(activityModel.getDate());
     }
 }

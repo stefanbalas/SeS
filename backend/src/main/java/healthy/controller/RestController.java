@@ -1,15 +1,12 @@
 package healthy.controller;
 
-import healthy.model.UserModel;
+import healthy.model.*;
 import healthy.service.HealthyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,8 +28,39 @@ public class RestController {
         }
     }
 
+
+    @PostMapping(value = "/saveLifestyle")
+    public ResponseEntity<String> saveLifestyle(@RequestBody LifestyleModel lifestyleModel) {
+        healthyService.saveLifestyleToDatabase(lifestyleModel);
+        return ResponseEntity.ok().body("Saved lifestyle to database. Yay! :)");
+    }
+
+    @PostMapping(value = "/saveAnalize")
+    public ResponseEntity<String> saveAnalize(@RequestBody AnalizeModel analizeModel) {
+        healthyService.saveAnalizeToDatabase(analizeModel);
+        return ResponseEntity.ok().body("Saved analize to database. Yay! :)");
+    }
+
+    @PostMapping(value = "/saveHistory")
+    public ResponseEntity<String> saveHistory(@RequestBody HistoryModel historyModel) {
+        healthyService.saveHistoryToDatabase(historyModel);
+        return ResponseEntity.ok().body("Saved history to database. Yay! :)");
+    }
+
+    @PostMapping(value = "/saveActivity")
+    public ResponseEntity<String> saveActivity(@RequestBody ActivityModel activityModel) {
+        healthyService.saveActivityToDatabase(activityModel);
+        return ResponseEntity.ok().body("Saved activity to database. Yay! :)");
+    }
+
+
     @GetMapping(value = "/getLifestyleTypes")
     public ResponseEntity<List<String>> getLifestyleTypes() {
         return ResponseEntity.ok().body(healthyService.getLifestyleTypes());
+    }
+
+    @GetMapping(value = "/getActivityByUserId/{id}")
+    public ResponseEntity<List<ActivityModel>> getActivityByUserId(@PathVariable("id") int id) {
+        return ResponseEntity.ok().body(healthyService.getActivityByUserId(id));
     }
 }

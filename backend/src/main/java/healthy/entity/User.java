@@ -1,5 +1,6 @@
 package healthy.entity;
 
+import healthy.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,17 +44,13 @@ public class User {
     public User() {
     }
 
-    public User(int userId) {
-        this.userId = userId;
-    }
-
-    public User(String firstName, String lastName, String email, int age, char gender, float height, String lifestyle) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-        this.gender = gender;
-        this.height = height;
-        this.lifestyle = lifestyle;
+    public User(UserModel userModel) {
+        this.firstName = userModel.getFirstName();
+        this.lastName = userModel.getLastName();
+        this.email = userModel.getEmail();
+        this.age = userModel.getAge();
+        this.gender = userModel.getGender();
+        this.height = userModel.getHeight();
+        this.lifestyle = userModel.getLifestyle();
     }
 }
