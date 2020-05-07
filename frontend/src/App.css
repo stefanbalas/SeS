@@ -73,3 +73,8 @@ button:focus {
 .MuiSvgIcon-root:hover {
   cursor: pointer;
 }
+
+.reference-values{
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
