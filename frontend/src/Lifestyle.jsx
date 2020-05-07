@@ -75,7 +75,7 @@ export class Lifestyle extends React.Component {
         data.timpMediuActivitate = parseInt(data.timpMediuActivitate);
         data.timpCalculator = parseInt(data.timpCalculator);
         console.log(JSON.stringify(data));
-        fetch('http://localhost:8080/saveLifestyle/', {
+        fetch('http://18.195.241.90:8081/saveLifestyle/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',

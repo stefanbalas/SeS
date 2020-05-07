@@ -61,7 +61,7 @@ export class MedicalHistory extends React.Component {
         data.lastVisit = data.lastVisit.getTime();
         data.recommendVisit = data.recommendVisit.getTime();
         console.log(JSON.stringify(data));
-        fetch('http://localhost:8080/saveHistory/', {
+        fetch('http://18.195.241.90:8081/saveHistory/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',

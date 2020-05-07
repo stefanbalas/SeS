@@ -67,7 +67,7 @@ export class MedicalTest extends React.Component{
         data.maxValue = parseFloat(data.maxValue.replace(",", "."));
         data.date = data.date.getTime();
         console.log(JSON.stringify(data));
-        fetch('http://localhost:8080/saveAnalize/', {
+        fetch('http://18.195.241.90:8081/saveAnalize/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',

@@ -58,7 +58,7 @@ export class Form extends React.Component{
         this.errors = {...initialErrors};
         let data = this.state;
 
-        fetch('http://localhost:8080/submitForm/', {
+        fetch('http://18.195.241.90:8081/submitForm/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
