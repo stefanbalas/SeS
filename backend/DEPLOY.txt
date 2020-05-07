@@ -1,7 +1,10 @@
 To deploy changes to AWS, enter the following commands in Terminal:
 
-1. mvn clean package spring-boot:repackage
-2. cd to SeS folder
-3. scp -i "ses.pem" ./target/healthy-0.0.1-SNAPSHOT.jar ubuntu@ec2-18-195-241-90.eu-central-1.compute.amazonaws.com:./
-4. ssh -i "ses.pem" ubuntu@ec2-18-195-241-90.eu-central-1.compute.amazonaws.com
-5. java -jar healthy-0.0.1-SNAPSHOT.jar &
+1. cd to SeS/backend
+2. mvn clean package spring-boot:repackage
+3. cd to SeS folder (cd ..)
+4. scp -i "ses.pem" ./target/healthy-0.0.1-SNAPSHOT.jar ubuntu@ec2-18-195-241-90.eu-central-1.compute.amazonaws.com:./
+5. ssh -i "ses.pem" ubuntu@ec2-18-195-241-90.eu-central-1.compute.amazonaws.com
+6. java -jar healthy-0.0.1-SNAPSHOT.jar &
+
+App now runs on 18.195.241.90:8081 :)
