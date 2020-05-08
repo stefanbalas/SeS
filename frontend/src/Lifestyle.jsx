@@ -11,6 +11,7 @@ import Radio from "@material-ui/core/Radio";
 import { withStyles } from '@material-ui/core/styles';
 import TextField from "@material-ui/core/TextField";
 import {Button} from "@material-ui/core";
+import {api_url} from "./helpers";
 
 
 const PurpleRadio = withStyles({
@@ -75,7 +76,7 @@ export class Lifestyle extends React.Component {
         data.timpMediuActivitate = parseInt(data.timpMediuActivitate);
         data.timpCalculator = parseInt(data.timpCalculator);
         console.log(JSON.stringify(data));
-        fetch('http://18.195.241.90:8081/saveLifestyle/', {
+        fetch(api_url + '/saveLifestyle/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -93,11 +94,20 @@ export class Lifestyle extends React.Component {
     render() {
         return (
             <div className="content container">
-                <h1>Lifestyle</h1>
-                <form className="d-flex flex-column col-10 m-auto pt-4">
+                <div className={"title d-flex flex-column col-10 m-auto pt-4"}>
+                    <h3>Lifestyle</h3>
+                </div>
+                <form className="d-flex flex-column col-10 m-auto pt-2">
                     <FormControl className="pb-2">
                         <InputLabel id="job-label">Job Activity</InputLabel>
                         <Select
+                            MenuProps={{
+                                getContentAnchorEl: null,
+                                anchorOrigin: {
+                                    vertical: "bottom",
+                                    horizontal: "left",
+                                }
+                            }}
                             labelId="job-label"
                             id="jobActivity"
                             name="jobActivity"
@@ -112,6 +122,13 @@ export class Lifestyle extends React.Component {
                     <FormControl className="pb-2">
                         <InputLabel id="freetimeActivity-label">Leisure Time Activity</InputLabel>
                         <Select
+                            MenuProps={{
+                                getContentAnchorEl: null,
+                                anchorOrigin: {
+                                    vertical: "bottom",
+                                    horizontal: "left",
+                                }
+                            }}
                             labelId="freetimeActivity-label"
                             id="freetimeActivity"
                             name="freetimeActivity"
@@ -132,8 +149,8 @@ export class Lifestyle extends React.Component {
                             error={this.state.practicesSport || this.errors.practicesSport ? false:true}
                             value={this.state.practicesSport}
                             onChange={this.handleChange}>
-                            <FormControlLabel value="1" control={<PurpleRadio />} label="YES" />
-                            <FormControlLabel value="2" control={<PurpleRadio />} label="NO" />
+                            <FormControlLabel value="1" control={<PurpleRadio />} label="Yes" />
+                            <FormControlLabel value="2" control={<PurpleRadio />} label="No" />
                         </RadioGroup>
                     </FormControl>
                     <TextField onChange={this.handleChange} value={this.state.timpMediuActivitate}

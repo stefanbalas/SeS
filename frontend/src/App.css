@@ -67,9 +67,6 @@ a, a:hover, .MuiMenuItem-root {
 button:focus {
   outline: none !important;
 }
-.MuiPopover-paper {
-  top: 50px !important;
-}
 .MuiSvgIcon-root:hover {
   cursor: pointer;
 }
@@ -77,4 +74,8 @@ button:focus {
 .reference-values{
   padding-top: 5%;
   padding-bottom: 5%;
+}
+
+#simple-menu {
+  margin-top: 35px;
 }

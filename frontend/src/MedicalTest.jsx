@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/date-fns';
+import {api_url} from "./helpers";
 
 const initialState = {
     userId: 1,
@@ -67,7 +68,7 @@ export class MedicalTest extends React.Component{
         data.maxValue = parseFloat(data.maxValue.replace(",", "."));
         data.date = data.date.getTime();
         console.log(JSON.stringify(data));
-        fetch('http://18.195.241.90:8081/saveAnalize/', {
+        fetch(api_url + '/saveAnalize/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -84,8 +85,10 @@ export class MedicalTest extends React.Component{
     render() {
         return (
             <div className="content container">
-                <h1>Medical Tests</h1>
-                <form className="d-flex flex-column col-10 m-auto pt-4">
+                <div className={"title d-flex flex-column col-10 m-auto pt-4"}>
+                    <h3>Medical Tests</h3>
+                </div>
+                <form className="d-flex flex-column col-10 m-auto pt-2">
                     <TextField onChange={this.handleChange} value={this.state.name}
                                error={this.state.name || this.errors.name ? false:true}
                                className="pb-2" required name="name" id="name" label="Name"/>
