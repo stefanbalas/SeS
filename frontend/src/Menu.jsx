@@ -25,6 +25,7 @@ import Home from "./Home";
 import Menu from '@material-ui/core/Menu';
 import Select from "@material-ui/core/Select/Select";
 import {Activity} from "./Activity";
+import {Progress} from "./Progress";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -128,6 +129,9 @@ export default function MenuListComposition() {
                                                                     <Link to="/activity">
                                                                         <MenuItem onClick={handleClose}>Activity</MenuItem>
                                                                     </Link>
+                                                                    <Link to="/progress">
+                                                                        <MenuItem onClick={handleClose}>Progress</MenuItem>
+                                                                    </Link>
                                                             </MenuList>
                                                         </ClickAwayListener>
                                                     </Paper>
@@ -171,6 +175,9 @@ export default function MenuListComposition() {
                         </Route>
                         <Route path="/Activity">
                             <Activity />
+                        </Route>
+                        <Route path="/progress">
+                            <Progress />
                         </Route>
                         <Route path="/">
                             <Home />
