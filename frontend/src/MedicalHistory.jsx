@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns";
 import Grid from "@material-ui/core/Grid";
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
+import {api_url} from "./helpers";
 
 const initialState = {
     userId: 1,
@@ -61,7 +62,7 @@ export class MedicalHistory extends React.Component {
         data.lastVisit = data.lastVisit.getTime();
         data.recommendVisit = data.recommendVisit.getTime();
         console.log(JSON.stringify(data));
-        fetch('http://localhost:8080/saveHistory/', {
+        fetch(api_url + '/saveHistory/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -79,46 +80,48 @@ export class MedicalHistory extends React.Component {
     render() {
         return (
             <div className="content container">
-                <h1>Medical History</h1>
-                <form className="d-flex flex-column col-10 m-auto pt-4">
-                    <TextField onChange={this.handleChange} value={this.state.name}
-                               error={this.state.name || this.errors.name ? false:true}
-                               className="pb-2" required name="name" id="name" label="Name"/>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="lastVisit"
-                                label="Last visit"
-                                value={this.state.lastVisit}
-                                onChange={this.handleDateChange}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
-                            />
-                        </Grid>
-                    </MuiPickersUtilsProvider>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="recommendVisit"
-                                label="Recommended Date"
-                                value={this.state.recommendVisit}
-                                onChange={this.handleEndDateChange}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
-                            />
-                        </Grid>
-                    </MuiPickersUtilsProvider>
-                    <Button variant="outlined" color="primary" onClick={this.onSubmit}>Submit</Button>
+                <div className={"title d-flex flex-column col-10 m-auto pt-4"}>
+                    <h3>Medical History</h3>
+                </div>
+                <form className="d-flex flex-column col-10 m-auto pt-2">
+                <TextField onChange={this.handleChange} value={this.state.name}
+                           error={this.state.name || this.errors.name ? false:true}
+                           className="pb-2" required name="name" id="name" label="Name"/>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify="space-around">
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="lastVisit"
+                            label="Last visit"
+                            value={this.state.lastVisit}
+                            onChange={this.handleDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </Grid>
+                </MuiPickersUtilsProvider>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify="space-around">
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="recommendVisit"
+                            label="Recommended Date"
+                            value={this.state.recommendVisit}
+                            onChange={this.handleEndDateChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </Grid>
+                </MuiPickersUtilsProvider>
+                <Button variant="outlined" color="primary" onClick={this.onSubmit}>Submit</Button>
                 </form>
             </div>
         )

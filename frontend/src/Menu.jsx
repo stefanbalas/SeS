@@ -23,6 +23,8 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import purple from "@material-ui/core/colors/purple";
 import Home from "./Home";
 import Menu from '@material-ui/core/Menu';
+import Select from "@material-ui/core/Select/Select";
+import {Activity} from "./Activity";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -123,6 +125,9 @@ export default function MenuListComposition() {
                                                                     <Link to="/lifestyle">
                                                                         <MenuItem onClick={handleClose}>Lifestyle</MenuItem>
                                                                     </Link>
+                                                                    <Link to="/activity">
+                                                                        <MenuItem onClick={handleClose}>Activity</MenuItem>
+                                                                    </Link>
                                                             </MenuList>
                                                         </ClickAwayListener>
                                                     </Paper>
@@ -163,6 +168,9 @@ export default function MenuListComposition() {
                         </Route>
                         <Route path="/lifestyle">
                             <Lifestyle />
+                        </Route>
+                        <Route path="/Activity">
+                            <Activity />
                         </Route>
                         <Route path="/">
                             <Home />

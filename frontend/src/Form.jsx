@@ -5,8 +5,11 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import {Button} from "@material-ui/core";
+import {api_url} from "./helpers";
+import axios from 'axios';
 
 const initialState = {
+    userId: 1,
     firstName: '',
     lastName: '',
     email: '',
@@ -58,7 +61,7 @@ export class Form extends React.Component{
         this.errors = {...initialErrors};
         let data = this.state;
 
-        fetch('http://localhost:8080/submitForm/', {
+        fetch( api_url +'/submitForm/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -90,6 +93,13 @@ export class Form extends React.Component{
                 <FormControl className="pb-2">
                     <InputLabel id="gender-label">Gender</InputLabel>
                     <Select
+                        MenuProps={{
+                            getContentAnchorEl: null,
+                            anchorOrigin: {
+                                vertical: "bottom",
+                                horizontal: "left",
+                            }
+                        }}
                         labelId="gender-label"
                         id="gender"
                         name="gender"
@@ -107,6 +117,13 @@ export class Form extends React.Component{
                 <FormControl className="pb-2">
                     <InputLabel id="lifestyle-label">Lifestyle</InputLabel>
                     <Select
+                        MenuProps={{
+                            getContentAnchorEl: null,
+                            anchorOrigin: {
+                                vertical: "bottom",
+                                horizontal: "left",
+                            }
+                        }}
                         labelId="lifestyle-label"
                         id="lifestyle"
                         name="lifestyle"

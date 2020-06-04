@@ -1,9 +1,6 @@
 import React from "react";
 import {Button} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/date-fns';
@@ -11,23 +8,20 @@ import {api_url} from "./helpers";
 
 const initialState = {
     userId: 1,
-    name: '',
-    value: 0,
-    minValue: 0,
-    maxValue: 0,
+    weight: 0,
+    step: 0,
+    water: 0,
     date: null
 };
 
 const initialErrors = {
-    name: 1,
-    value: 1,
-    minValue: 1,
-    maxValue: 1,
+    weight: 1,
+    step: 1,
+    water: 1,
     date: 1,
-
 };
 
-export class MedicalTest extends React.Component{
+export class Activity extends React.Component{
 
     errors = {...initialErrors};
 
@@ -63,12 +57,9 @@ export class MedicalTest extends React.Component{
         this.setState(initialState);
         this.errors = {...initialErrors};
         let data = this.state;
-        data.value = parseFloat(data.value.replace(",", "."));
-        data.minValue = parseFloat(data.minValue.replace(",", "."));
-        data.maxValue = parseFloat(data.maxValue.replace(",", "."));
         data.date = data.date.getTime();
         console.log(JSON.stringify(data));
-        fetch(api_url + '/saveAnalize/', {
+        fetch(api_url + '/saveActivity/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -86,30 +77,18 @@ export class MedicalTest extends React.Component{
         return (
             <div className="content container">
                 <div className={"title d-flex flex-column col-10 m-auto pt-4"}>
-                    <h3>Medical Tests</h3>
+                    <h3>Activity</h3>
                 </div>
                 <form className="d-flex flex-column col-10 m-auto pt-2">
-                    <TextField onChange={this.handleChange} value={this.state.name}
-                               error={this.state.name || this.errors.name ? false:true}
-                               className="pb-2" required name="name" id="name" label="Name"/>
-                    <TextField onChange={this.handleChange} value={this.state.value}
-                               error={this.state.value || this.errors.value ? false:true}
-                               className="pb-2" required name="value" id="value" label="Value"/>
-                    <span className="reference-values">Reference Values:</span>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <TextField onChange={this.handleChange} value={this.state.minValue}
-                                           error={this.state.minValue || this.errors.minValue ? false:true}
-                                           className="pb-2" required name="minValue" id="minValue" label="Min Value"/>
-                            </Col>
-                            <Col>
-                                <TextField onChange={this.handleChange} value={this.state.maxValue}
-                                           error={this.state.maxValue || this.errors.maxValue ? false:true}
-                                           className="pb-2" required name="maxValue" id="maxValue" label="Max Value"/>
-                            </Col>
-                        </Row>
-                    </Container>
+                    <TextField onChange={this.handleChange} value={this.state.weight}
+                               error={this.state.weight || this.errors.weight ? false:true}
+                               className="pb-2" required name="weight" id="weight" label="Weight"/>
+                    <TextField onChange={this.handleChange} value={this.state.step}
+                               error={this.state.step || this.errors.step ? false:true}
+                               className="pb-2" required name="step" id="step" label="Step"/>
+                    <TextField onChange={this.handleChange} value={this.state.water}
+                               error={this.state.water || this.errors.water ? false:true}
+                               className="pb-2" required name="water" id="water" label="Water Intake"/>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <Grid container justify="space-around">
                             <KeyboardDatePicker
