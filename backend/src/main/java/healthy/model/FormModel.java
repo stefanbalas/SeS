@@ -1,5 +1,6 @@
 package healthy.model;
 
+import healthy.entity.Form;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel {
+public class FormModel {
     private String firstName;
     private String lastName;
     private String email;
@@ -17,6 +18,16 @@ public class UserModel {
     private char gender;
     private float height;
     private String lifestyle;
+
+    public FormModel(Form form) {
+        this.firstName = form.getFirstName();
+        this.lastName = form.getLastName();
+        this.email = form.getEmail();
+        this.age = form.getAge();
+        this.gender = form.getGender();
+        this.height = form.getHeight();
+        this.lifestyle = form.getLifestyle();
+    }
 
     public void validate() {
         if (this.firstName == null) throw new IllegalArgumentException("firstName must be present");

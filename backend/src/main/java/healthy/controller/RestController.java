@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -18,15 +21,21 @@ public class RestController {
     HealthyService healthyService;
 
     @PostMapping(value = "/submitForm")
-    public ResponseEntity<String> submitForm(@RequestBody UserModel userModel) {
+    public ResponseEntity<?> submitForm(@RequestBody FormModel formModel) {
         try {
-            userModel.validate();
-            healthyService.checkIfEmailExists(userModel.getEmail());
-            healthyService.saveUserToDatabase(userModel);
+            formModel.validate();
+            healthyService.checkIfEmailExists(formModel.getEmail());
+            healthyService.saveFormToDatabase(formModel);
             return ResponseEntity.ok().body("Saved user to database. Yay! :)");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping(value = "/getAllForm")
+    public ResponseEntity<List<FormModel>> getAllForm() {
+        return ResponseEntity.ok().body(healthyService.getAllForm());
+
     }
 
     @PostMapping(value = "/saveLifestyle")
@@ -35,10 +44,20 @@ public class RestController {
         return ResponseEntity.ok().body("Saved lifestyle to database. Yay! :)");
     }
 
+    @GetMapping(value = "/getAllLifestyle")
+    public ResponseEntity<List<LifestyleModel>> getAllLifestyle() {
+        return ResponseEntity.ok().body(healthyService.getAllLifestyle());
+    }
+
     @PostMapping(value = "/saveAnalize")
     public ResponseEntity<String> saveAnalize(@RequestBody AnalizeModel analizeModel) {
         healthyService.saveAnalizeToDatabase(analizeModel);
         return ResponseEntity.ok().body("Saved analize to database. Yay! :)");
+    }
+
+    @GetMapping(value = "/getAllAnalize")
+    public ResponseEntity<List<AnalizeModel>> getAllAnalize() {
+        return ResponseEntity.ok().body(healthyService.getAllAnalize());
     }
 
     @PostMapping(value = "/saveHistory")
@@ -47,20 +66,25 @@ public class RestController {
         return ResponseEntity.ok().body("Saved history to database. Yay! :)");
     }
 
+    @GetMapping(value = "/getAllHistory")
+    public ResponseEntity<List<HistoryModel>> getAllHistory() {
+        return ResponseEntity.ok().body(healthyService.getAllHistory());
+    }
+
     @PostMapping(value = "/saveActivity")
     public ResponseEntity<String> saveActivity(@RequestBody ActivityModel activityModel) {
         healthyService.saveActivityToDatabase(activityModel);
         return ResponseEntity.ok().body("Saved activity to database. Yay! :)");
     }
 
+    @GetMapping(value = "/getAllActivity")
+    public ResponseEntity<List<ActivityModel>> getAllActivity() {
+        return ResponseEntity.ok().body(healthyService.getAllActivities());
+    }
+
 
     @GetMapping(value = "/getLifestyleTypes")
     public ResponseEntity<List<String>> getLifestyleTypes() {
         return ResponseEntity.ok().body(healthyService.getLifestyleTypes());
-    }
-
-    @GetMapping(value = "/getActivityByUserId/{id}")
-    public ResponseEntity<List<ActivityModel>> getActivityByUserId(@PathVariable("id") int id) {
-        return ResponseEntity.ok().body(healthyService.getActivityByUserId(id));
     }
 }

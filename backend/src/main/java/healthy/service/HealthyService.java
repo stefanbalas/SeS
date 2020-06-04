@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,13 +17,13 @@ public class HealthyService {
     private final ActivityRepository activityRepository;
     private final AnalizeRepository analizeRepository;
     private final HistoryRepository historyRepository;
-    private final UserRepository userRepository;
+    private final FormRepository formRepository;
 
     @Autowired
     public HealthyService(LifestyleRepository lifestyleRepository, LifestyleTypeRepository lifestyleTypeRepository,
                           ActivityRepository activityRepository, AnalizeRepository analizeRepository,
-                          HistoryRepository historyRepository, UserRepository userRepository) {
-        this.userRepository = userRepository;
+                          HistoryRepository historyRepository, FormRepository formRepository) {
+        this.formRepository = formRepository;
         this.lifestyleTypeRepository = lifestyleTypeRepository;
         this.activityRepository = activityRepository;
         this.analizeRepository = analizeRepository;
@@ -30,8 +31,8 @@ public class HealthyService {
         this.lifestyleRepository = lifestyleRepository;
     }
 
-    public void saveUserToDatabase(UserModel userModel) {
-        userRepository.save(new User(userModel));
+    public void saveFormToDatabase(FormModel formModel) {
+        formRepository.save(new Form(formModel));
     }
 
     public void saveLifestyleToDatabase(LifestyleModel lifestyleModel) {
@@ -51,7 +52,7 @@ public class HealthyService {
     }
 
     public void checkIfEmailExists(String email) {
-        if(userRepository.findByEmail(email).isPresent())
+        if (formRepository.findByEmail(email).isPresent())
             throw new IllegalArgumentException("email already exists");
     }
 
@@ -60,9 +61,33 @@ public class HealthyService {
         return lifestyleTypeRepository.findAll().stream().map(LifestyleType::getLifestyleName).collect(Collectors.toList());
     }
 
-    public List<ActivityModel> getActivityByUserId(int id) {
-        return activityRepository.findAllByUserId(id).stream()
+    public List<ActivityModel> getAllActivities() {
+        return activityRepository.findAll().stream()
                 .map(ActivityModel::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<HistoryModel> getAllHistory() {
+        return historyRepository.findAll().stream()
+                .map(HistoryModel::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnalizeModel> getAllAnalize() {
+        return analizeRepository.findAll().stream()
+                .map(AnalizeModel::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<LifestyleModel> getAllLifestyle() {
+        return lifestyleRepository.findAll().stream()
+                .map(LifestyleModel::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<FormModel> getAllForm() throws NoSuchElementException {
+        return formRepository.findAll().stream()
+                .map(FormModel::new)
                 .collect(Collectors.toList());
     }
 }

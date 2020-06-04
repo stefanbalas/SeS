@@ -1,6 +1,6 @@
 package healthy.entity;
 
-import healthy.model.UserModel;
+import healthy.model.FormModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @AllArgsConstructor
-public class User {
+public class Form {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,16 +41,16 @@ public class User {
     @Column(name = "lifestyle", nullable = false)
     private String lifestyle;
 
-    public User() {
+    public Form() {
     }
 
-    public User(UserModel userModel) {
-        this.firstName = userModel.getFirstName();
-        this.lastName = userModel.getLastName();
-        this.email = userModel.getEmail();
-        this.age = userModel.getAge();
-        this.gender = userModel.getGender();
-        this.height = userModel.getHeight();
-        this.lifestyle = userModel.getLifestyle();
+    public Form(FormModel formModel) {
+        this.firstName = formModel.getFirstName();
+        this.lastName = formModel.getLastName();
+        this.email = formModel.getEmail();
+        this.age = formModel.getAge();
+        this.gender = formModel.getGender();
+        this.height = formModel.getHeight();
+        this.lifestyle = formModel.getLifestyle();
     }
 }
